@@ -1,28 +1,22 @@
-# phpSimpleErrorHandler
+# phpWowFilter
 
-Simple Error Handler, caught fatal error message in error_log
+Eazy Secure Filter
 
 ## Requirement
 
-PHP 5.3+
+PHP 5.2+
 
 ## Usage
 
 ### Standalone WowLog library
 
 ```
-include '../src/Wow/Exception/WowSimpleShutdownHandler.php';
+include 'src/Wow/Security/WowFilter.php';
 
-ini_set('error_log','error.log');
+use Wow\Security\WowFilter;
 
-new Wow\Exception\WowSimpleErrorHandler();
-
-try{
-    echo $foo;
-}
-catch(Exception $e) {
-    var_dump($e);
-}
+$t = WowFilter::v('123abc!@#', 'string');
+$t = WowFilter::v('123abc!@#', 'string', array('min'=>9, 'max'=>9));
 ```
 
 ### Work with Composer
@@ -32,7 +26,7 @@ catch(Exception $e) {
 ```
 {
     "require": {
-        "yftzeng/wow-simple-error-handler": "dev-master"
+        "yftzeng/wowfilter": "dev-master"
     }
 }
 ```
@@ -47,16 +41,25 @@ $ php composer.phar update
 ```
 include 'vendor/autoload.php';
 
-ini_set('error_log','error.log');
+use Wow\Security\WowFilter;
 
-new Wow\Exception\WowSimpleErrorHandler();
+$t = WowFilter::v('123abc!@#', 'string');
+$t = WowFilter::v('123abc!@#', 'string', array('min'=>9, 'max'=>9));
+```
 
-try{
-    echo $foo;
-}
-catch(Exception $e) {
-    var_dump($e);
-}
+## Example
+
+```
+$t = WowFilter::v('123abc!@#', 'string');
+$t = WowFilter::v('123abc!@#', 'string', array('min'=>9, 'max'=>9));
+$t = WowFilter::v('許蓋功', 'utf8-string', array('min'=>4, 'max'=>4));
+$t = WowFilter::v('1', 'boolean');
+$t = WowFilter::v('123', 'int', array('min'=>123, 'max'=>123));
+$t = WowFilter::v('123', 'float', array('min'=>123, 'max'=>123));
+$t = WowFilter::v('http://www.google.com', 'url', array('min'=>5, 'max'=>255));
+$t = WowFilter::v('test@abc.com', 'mail', array('min'=>1, 'max'=>255));
+$t = WowFilter::v('2013-12-12', 'db-date');
+$t = WowFilter::v('2013-12-12 11:11:11', 'db-time');
 ```
 
 ## License
