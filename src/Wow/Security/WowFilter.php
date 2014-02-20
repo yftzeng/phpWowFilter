@@ -313,7 +313,13 @@ class WowFilter
         case 'base64_safe_encode':
             return strtr($input, '+/', '-_');
         case 'base64_safe_decode':
-            return strtr($data, '-_', '+/');
+            return strtr($input, '-_', '+/');
+        case 'filename':
+            return str_replace(
+                array(" ", '"', "'", "&", "/", "\\", "?", "#"),
+                '_',
+                $input
+            );
         default:
             return false;
         }
