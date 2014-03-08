@@ -16,7 +16,7 @@
  * @link     http://blog.gcos.me/
  */
 
-namespace Wow\Security;
+namespace Gcos\Me\Security;
 
 /**
  * WowFilter class
